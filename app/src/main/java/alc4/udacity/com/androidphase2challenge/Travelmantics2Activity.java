@@ -25,10 +25,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class Travelmantics2Activity extends AppCompatActivity {
-    ArrayList<TravelDeal1> deal1s;
+    //ArrayList<TravelDeal1> deal1s = new ArrayList<>();
+    /*ArrayList<TravelDeal1> deal1s;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
-    private ChildEventListener mChildListerner;
+    private ChildEventListener mChildListerner;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +71,12 @@ public class Travelmantics2Activity extends AppCompatActivity {
             }
         };
         mDatabaseReference.addChildEventListener(mChildListerner);*/
-
+        FirebaseUtil.openFbReference("traveldeals",this);
         RecyclerView rvDeals = (RecyclerView) findViewById(R.id.rvDeals);
-        final DealAdapter adapter =new DealAdapter();
+        final DealAdapter adapter = new DealAdapter();
         rvDeals.setAdapter(adapter);
 
-        LinearLayoutManager dealsLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager dealsLayoutManager = new LinearLayoutManager(this,  RecyclerView.VERTICAL, false);
         rvDeals.setLayoutManager(dealsLayoutManager);
     }
 
@@ -94,5 +96,24 @@ public class Travelmantics2Activity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        FirebaseUtil.detachListener();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*FirebaseUtil.openFbReference("traveldeals", this);
+        RecyclerView rvDeals = (RecyclerView) findViewById(R.id.rvDeals);
+        final DealAdapter adapter = new DealAdapter();
+        rvDeals.setAdapter(adapter);
+        LinearLayoutManager dealsLayoutManager =
+                new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        rvDeals.setLayoutManager(dealsLayoutManager);*/
+        FirebaseUtil.attachListener();
     }
 }

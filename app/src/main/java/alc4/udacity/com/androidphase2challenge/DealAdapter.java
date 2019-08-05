@@ -22,17 +22,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class DealAdapter extends  RecyclerView.Adapter<DealAdapter.DealViewHolder> {
+    //ArrayList<TravelDeal1> deal1s = new ArrayList<TravelDeal1>();
     ArrayList<TravelDeal1> deal1s;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
-    private ChildEventListener mChildEventListener;
+    private ChildEventListener mChildtListener;
 
     public DealAdapter(){
-        FirebaseUtil.openFbReference("traveldeals");
+        //FirebaseUtil.openFbReference("traveldeals");
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
         deal1s = FirebaseUtil.mDeals;
-        mChildEventListener = new ChildEventListener() {
+        mChildtListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //TextView travel2Deals=(TextView)findViewById(R.id.travel2Title);
@@ -65,7 +66,7 @@ public class DealAdapter extends  RecyclerView.Adapter<DealAdapter.DealViewHolde
 
             }
         };
-        mDatabaseReference.addChildEventListener(mChildEventListener);
+        mDatabaseReference.addChildEventListener(mChildtListener);
     }
 
     @NonNull
@@ -88,21 +89,21 @@ public class DealAdapter extends  RecyclerView.Adapter<DealAdapter.DealViewHolde
     }
 
     public class DealViewHolder extends RecyclerView.ViewHolder
-    implements View.OnClickListener{
+    implements View.OnClickListener {
 
         TextView tvTitle;
         TextView tvdescription;
         TextView tvprice;
 
-        public DealViewHolder(View itemView){
+        public DealViewHolder(View itemView) {
             super(itemView);
-            tvTitle =(TextView)itemView.findViewById(R.id.travel2Title);
-            tvdescription =(TextView)itemView.findViewById(R.id.travel2Description);
-            tvprice =(TextView)itemView.findViewById(R.id.travel2Price);
+            tvTitle = (TextView) itemView.findViewById(R.id.travel2Title);
+            tvdescription = (TextView) itemView.findViewById(R.id.travel2Description);
+            tvprice = (TextView) itemView.findViewById(R.id.travel2Price);
             itemView.setOnClickListener(this);
         }
 
-        public void bind (TravelDeal1 deal){
+        public void bind(TravelDeal1 deal) {
             tvTitle.setText(deal.getTitle());
             tvdescription.setText(deal.getDescription());
             tvprice.setText(deal.getPrice());
@@ -115,7 +116,9 @@ public class DealAdapter extends  RecyclerView.Adapter<DealAdapter.DealViewHolde
             TravelDeal1 selecteddeal = deal1s.get(position);
             Intent intent = new Intent(v.getContext(), Travelmantics1Activity.class);
             intent.putExtra("deal", selecteddeal);
+            v.getContext().startActivity(intent);
         }
+
     }
 
 }
