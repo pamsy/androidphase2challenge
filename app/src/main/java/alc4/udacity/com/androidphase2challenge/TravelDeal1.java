@@ -1,6 +1,8 @@
 package alc4.udacity.com.androidphase2challenge;
 
-public class TravelDeals {
+import java.io.Serializable;
+
+public class TravelDeal1 implements Serializable {
 
     private String id;
     private String title;
@@ -9,15 +11,14 @@ public class TravelDeals {
     private String imageUrl;
     private String imageName;
 
-    public TravelDeals() {
+    public TravelDeal1() {
     }
 
-    public TravelDeals(String id, String title, String description, String price, String imageUrl, String imageName) {
+    public TravelDeal1(String title, String description, String price, String imageName) {
         this.setId(id);
         this.setTitle(title);
         this.setDescription(description);
         this.setPrice(price);
-        this.setImageUrl(imageUrl);
         this.setImageName(imageName);
     }
 

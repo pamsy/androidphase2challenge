@@ -1,7 +1,7 @@
 package alc4.udacity.com.androidphase2challenge;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toolbar;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,5 @@ public class MainActivity extends AppCompatActivity {
 
 
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
     }
 }
