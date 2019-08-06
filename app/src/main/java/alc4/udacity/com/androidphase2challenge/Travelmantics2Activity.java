@@ -3,6 +3,7 @@ package alc4.udacity.com.androidphase2challenge;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,13 +75,13 @@ public class Travelmantics2Activity extends AppCompatActivity {
             }
         };
         mDatabaseReference.addChildEventListener(mChildListerner);*/
-        FirebaseUtil.openFbReference("traveldeals",this);
+       /* FirebaseUtil.openFbReference("traveldeals",this);
         RecyclerView rvDeals = (RecyclerView) findViewById(R.id.rvDeals);
         final DealAdapter adapter = new DealAdapter();
         rvDeals.setAdapter(adapter);
 
         LinearLayoutManager dealsLayoutManager = new LinearLayoutManager(this,  RecyclerView.VERTICAL, false);
-        rvDeals.setLayoutManager(dealsLayoutManager);
+        rvDeals.setLayoutManager(dealsLayoutManager);*/
     }
 
     @Override
@@ -94,7 +98,17 @@ public class Travelmantics2Activity extends AppCompatActivity {
                 Intent intent = new Intent(this, Travelmantics1Activity.class);
                 startActivity(intent);
                 return true;
-        }
+            case R.id.logout_menu:
+                AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d("Logout", "User Logged Out");
+                                FirebaseUtil.attachListener();
+                            }
+                        });
+                FirebaseUtil.detachListener();
+                return true;        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -107,13 +121,17 @@ public class Travelmantics2Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        /*FirebaseUtil.openFbReference("traveldeals", this);
+        FirebaseUtil.openFbReference("traveldeals", this);
         RecyclerView rvDeals = (RecyclerView) findViewById(R.id.rvDeals);
         final DealAdapter adapter = new DealAdapter();
         rvDeals.setAdapter(adapter);
         LinearLayoutManager dealsLayoutManager =
                 new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        rvDeals.setLayoutManager(dealsLayoutManager);*/
+        rvDeals.setLayoutManager(dealsLayoutManager);
         FirebaseUtil.attachListener();
+    }
+
+    public  void showMenu (){
+        invalidateOptionsMenu();
     }
 }
