@@ -14,12 +14,13 @@ public class TravelDeal1 implements Serializable {
     public TravelDeal1() {
     }
 
-    public TravelDeal1(String title, String description, String price, String imageName) {
+    public TravelDeal1(String title, String description, String price, String imageName, String imageUrl) {
         this.setId(id);
         this.setTitle(title);
         this.setDescription(description);
         this.setPrice(price);
         this.setImageName(imageName);
+        this.setImageUrl(imageUrl);
     }
 
     public String getId() {
