@@ -14,13 +14,29 @@ public class TravelDeal1 implements Serializable {
     public TravelDeal1() {
     }
 
+<<<<<<< HEAD
+    /*public TravelDeal1(String title, String description, String price, String imageName) {
+=======
     public TravelDeal1(String title, String description, String price, String imageName, String imageUrl) {
+>>>>>>> 019d195b3de850a5b67763e5af86102961572320
         this.setId(id);
         this.setTitle(title);
         this.setDescription(description);
         this.setPrice(price);
         this.setImageName(imageName);
+<<<<<<< HEAD
+    }*/
+
+    public TravelDeal1(String title, String description, String price, String imageUrl, String imageName) {
+        this.setId(id);
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setPrice(price);
         this.setImageUrl(imageUrl);
+        this.setImageName(imageName);
+=======
+        this.setImageUrl(imageUrl);
+>>>>>>> 019d195b3de850a5b67763e5af86102961572320
     }
 
     public String getId() {

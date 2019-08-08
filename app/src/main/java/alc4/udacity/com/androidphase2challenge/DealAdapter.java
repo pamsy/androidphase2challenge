@@ -29,7 +29,11 @@ public class DealAdapter extends  RecyclerView.Adapter<DealAdapter.DealViewHolde
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildtListener;
+<<<<<<< HEAD
+    private ImageView imageView;
+=======
     ImageView imageView;
+>>>>>>> 019d195b3de850a5b67763e5af86102961572320
 
     public DealAdapter(){
         //FirebaseUtil.openFbReference("traveldeals");
@@ -103,7 +107,11 @@ public class DealAdapter extends  RecyclerView.Adapter<DealAdapter.DealViewHolde
             tvTitle = (TextView) itemView.findViewById(R.id.travel2Title);
             tvdescription = (TextView) itemView.findViewById(R.id.travel2Description);
             tvprice = (TextView) itemView.findViewById(R.id.travel2Price);
+<<<<<<< HEAD
+            imageView = itemView.findViewById(R.id.travel2Image);
+=======
             imageView = itemView.findViewById(R.id.dealImage);
+>>>>>>> 019d195b3de850a5b67763e5af86102961572320
             itemView.setOnClickListener(this);
         }
 
@@ -112,6 +120,8 @@ public class DealAdapter extends  RecyclerView.Adapter<DealAdapter.DealViewHolde
             tvdescription.setText(deal.getDescription());
             tvprice.setText(deal.getPrice());
             showImage(deal.getImageUrl());
+<<<<<<< HEAD
+=======
         }
 
         private void showImage(String url) {
@@ -122,8 +132,18 @@ public class DealAdapter extends  RecyclerView.Adapter<DealAdapter.DealViewHolde
                         .centerCrop()
                         .into(imageView);
             }
+>>>>>>> 019d195b3de850a5b67763e5af86102961572320
         }
 
+        private void showImage(String url) {
+            if (url != null && !url.isEmpty()) {
+                Picasso.with(imageView.getContext())
+                        .load(url)
+                        .resize(250, 250)
+                        .centerCrop()
+                        .into(imageView);
+            }
+        }
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();

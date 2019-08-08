@@ -10,11 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Travelmantics1Activity">
+        <activity android:name=".Travelmantics1Activity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".Travelmantics2Activity" >
+        <activity android:name=".Travelmantics2Activity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

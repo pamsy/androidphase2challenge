@@ -128,19 +128,21 @@ public class Travelmantics1Activity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICTURE_RESULT && resultCode == RESULT_OK) {
             Uri imageUri = data.getData();
-            StorageReference ref = FirebaseUtil.mStorageRef.child(imageUri.getLastPathSegment());
+            final StorageReference ref = FirebaseUtil.mStorageRef.child(imageUri.getLastPathSegment());
             ref.putFile(imageUri).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    String url = taskSnapshot.getStorage().getDownloadUrl().toString();
+                    //String url = taskSnapshot.getStorage().getDownloadUrl().toString();
+                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!urlTask.isSuccessful());
+                    Uri downloadUrl = urlTask.getResult();
+                    String url = downloadUrl.toString();
 
-                    //Task<Uri> uriTask=taskSnapshot.getStorage().getDownloadUrl();
-                    //String url = uriTask.getResult().toString();
-                    //String pictureName = taskSnapshot.getStorage().getPath();
+                    String pictureName = taskSnapshot.getStorage().getPath();
                     deal.setImageUrl(url);
-                    //deal.setImageName(pictureName);
+                    deal.setImageName(pictureName);
                     Log.d("Url: ", url);
-                    //Log.d("Name", pictureName);
+                    Log.d("Name", pictureName);
                     showImage(url);
                 }
             });
@@ -188,12 +190,14 @@ public class Travelmantics1Activity extends AppCompatActivity {
         if (url != null && url.isEmpty() == false) {
             int width = Resources.getSystem().getDisplayMetrics().widthPixels;
             //Picasso.get()
-            Log.d("msg: ", " je suis dans la fonction showImage");
+
             Picasso.with(this)
                     .load(url)
-                    .resize(width, width*2/3)
+                    .resize(width*2/3, width*2/3)
                     .centerCrop()
                     .into(imageView);
+
+            Log.d("msg: ", " je suis dans la fonction showImage");
         }
     }
 
